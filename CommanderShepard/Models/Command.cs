@@ -15,6 +15,5 @@ namespace CommanderShepard.Models
         [Required]
         [MaxLength(250)]
         public string Platform { get; set; }
-
     }
 }

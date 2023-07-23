@@ -31,6 +31,8 @@ namespace CommanderShepard
 
             services.AddControllers();
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddScoped<ICommanderRepo, PostgreCommanderRepo>();
         }
 

@@ -1,3 +1,4 @@
+
 using CommanderShepard.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +31,10 @@ namespace CommanderShepard
             services.AddEntityFrameworkNpgsql().AddDbContext<CommanderContext>(opt => opt.UseNpgsql
             (Configuration.GetConnectionString("CommanderConnection")));
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(s =>
+            {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
